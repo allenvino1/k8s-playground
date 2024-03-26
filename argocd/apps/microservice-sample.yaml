@@ -8,7 +8,7 @@ spec:
   source:
     repoURL: https://github.com/allenvino1/k8s-playground.git
     targetRevision: HEAD
-    path: argocd/microservice-sample
+    path: argocd/microservice-sample/chart
     helm:
       releaseName: microservice-sample
       valueFiles:
@@ -16,3 +16,7 @@ spec:
   destination:
     server: "https://kubernetes.default.svc"
     namespace: devx
+  syncPolicy:
+    automated: {}
+    syncOptions:
+    - CreateNamespace=true
