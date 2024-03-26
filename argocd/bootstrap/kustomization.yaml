@@ -9,7 +9,6 @@ helmCharts:
     version: 5.53.14
     repo: https://argoproj.github.io/argo-helm
     includeCRDs: true
-    # Ref: https://github.com/argoproj/argo-helm/blob/argo-cd-5.53.14/charts/argo-cd/values.yaml
     valuesInline:
       ## Dex
       dex:
