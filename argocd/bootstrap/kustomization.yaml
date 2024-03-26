@@ -44,8 +44,8 @@ helmCharts:
           namespace: argocd
           project: argocd
           source:
-            # repoURL: https://github.com/allenvino1/k8s-playground.git
-            path: apps/
+            repoURL: https://github.com/allenvino1/k8s-playground.git
+            path: argocd/apps/
             directory:
               recurse: true
           destination:
