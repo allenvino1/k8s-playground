@@ -1,0 +1,55 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+namespace: argocd
+resources:
+  - ns.yaml
+helmCharts:
+  - name: argo-cd
+    releaseName: argocd
+    version: 5.53.14
+    repo: https://argoproj.github.io/argo-helm
+    includeCRDs: true
+    # Ref: https://github.com/argoproj/argo-helm/blob/argo-cd-5.53.14/charts/argo-cd/values.yaml
+    valuesInline:
+      ## Dex
+      dex:
+        # -- Enable dex
+        enabled: false
+      ## Argo Configs
+      configs:
+        # General Argo CD configuration
+        ## Ref: https://github.com/argoproj/argo-cd/blob/master/docs/operator-manual/argocd-cm.yaml
+        cm:      
+          # -- Timeout to discover if a new manifests version got published to the repository
+          # Quick reconciliation to bootstrap
+          timeout.reconciliation: 5s
+  - name: argocd-apps
+    releaseName: argocd-apps
+    version: 1.4.1
+    repo: https://argoproj.github.io/argo-helm
+    valuesInline:
+      projects:
+        - name: argocd
+          namespace: argocd
+          sourceRepos:
+            - '*'
+          destinations:
+            - namespace: argocd
+              server: https://kubernetes.default.svc
+          clusterResourceWhitelist:
+            - group: "*"
+              kind: "*"
+      applications:
+        - name: argocd-bootstrap-apps
+          namespace: argocd
+          project: argocd
+          source:
+            # repoURL: https://github.com/allenvino1/k8s-playground.git
+            path: apps/
+            directory:
+              recurse: true
+          destination:
+            server: https://kubernetes.default.svc
+            namespace: argocd
+          syncPolicy:
+            automated: {}
