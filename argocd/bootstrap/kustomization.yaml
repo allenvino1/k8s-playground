@@ -5,7 +5,7 @@ resources:
   - ns.yaml
 helmGlobals:
   chartHome: bootstrap-charts
-# helmCharts:
+helmCharts:
 #   - name: chart
 #     releaseName: argocd
 #     version: 0.1.0
