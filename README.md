@@ -21,7 +21,7 @@
 - Install Argo and install other applications on the fly.
 ```sh
     cd argocd/
-    kubectl kustomize --enable-helm bootstrap/ |  kubectl apply -f -
+    kubectl kustomize --enable-helm bootstrap |  kubectl apply -f -
 ```
 
 ```sh
@@ -36,3 +36,12 @@
 ```sh
     k3d cluster delete argocd
 ```
+
+
+## TODO File structure and workflow
+
+- Create a helm chart for the bootstrap apps
+- Redo bootstrap process to use kustomize to render my helm charts of bootstrap apps
+- Referencing a specific values file per bootstrap app
+
+https://kubectl.docs.kubernetes.io/references/kustomize/builtins/#_helmchartinflationgenerator_

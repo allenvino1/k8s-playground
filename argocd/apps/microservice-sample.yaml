@@ -12,7 +12,7 @@ spec:
     helm:
       releaseName: microservice-sample
       valueFiles:
-      - values-prod.yaml
+      - argocd/envs/devx/values-prod.yaml
   destination:
     server: "https://kubernetes.default.svc"
     namespace: devx
