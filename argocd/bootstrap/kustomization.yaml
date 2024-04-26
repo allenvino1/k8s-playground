@@ -53,7 +53,7 @@ helmCharts:
           source:
             repoURL: https://github.com/allenvino1/k8s-playground.git
             targetRevision: HEAD
-            path: bootstrap-charts/chart
+            path: argocd/bootstrap-charts/chart
             helm:
               releaseName: argocd-bootstrap-apps
               valueFiles:
