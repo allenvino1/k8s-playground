@@ -3,7 +3,15 @@ kind: Kustomization
 namespace: argocd
 resources:
   - ns.yaml
-helmCharts:
+helmGlobals:
+  chartHome: bootstrap-charts
+# helmCharts:
+#   - name: chart
+#     releaseName: argocd
+#     version: 0.1.0
+#     namespace: argocd
+#     additionalValuesFiles:
+#     - ../envs/devx.yaml
   - name: argo-cd
     releaseName: argocd
     version: 5.53.14
@@ -44,11 +52,27 @@ helmCharts:
           project: argocd
           source:
             repoURL: https://github.com/allenvino1/k8s-playground.git
-            path: argocd/apps/
-            directory:
-              recurse: true
+            chart: chart
+            helm:
+              releaseName: argocd-bootstrap-apps
+              valueFiles:
+              - ../../envs/devx.yaml
           destination:
             server: https://kubernetes.default.svc
             namespace: argocd
           syncPolicy:
             automated: {}
+      # applications:
+      #   - name: argocd-bootstrap-apps
+      #     namespace: argocd
+      #     project: argocd
+      #     source:
+      #       repoURL: https://github.com/allenvino1/k8s-playground.git
+      #       path: argocd/apps/
+      #       directory:
+      #         recurse: true
+      #     destination:
+      #       server: https://kubernetes.default.svc
+      #       namespace: argocd
+      #     syncPolicy:
+      #       automated: {}

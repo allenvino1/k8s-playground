@@ -8,12 +8,6 @@ argocd:
   repoURL: https://argoproj.github.io/argo-helm
   version: 5.53.14
 
-externalSecrets:
-  chart: external-secrets
-  repoURL: https://charts.external-secrets.io
-  version: 0.8.2
-
-
 replicaCount: 1
 
 image:
