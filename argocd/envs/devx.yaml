@@ -13,6 +13,10 @@ externalSecrets:
   repoURL: https://charts.external-secrets.io
   version: 0.8.3
 
+certManager:
+  chart: cert-manager
+  repoURL: https://charts.jetstack.io
+  version: v1.13.2
 
 replicaCount: 1
 
