@@ -1,1 +1,2 @@
 argocd/*/charts/*
+argocd/bootstrap/bootstrap-charts/argo*
