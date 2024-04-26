@@ -57,7 +57,7 @@ helmCharts:
             helm:
               releaseName: argocd-bootstrap-apps
               valueFiles:
-              - ../envs/devx.yaml
+              - ../../../envs/devx.yaml
           destination:
             server: https://kubernetes.default.svc
             namespace: argocd
