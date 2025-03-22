@@ -2,11 +2,6 @@
 - Argocd Playground
 
 
-## Bug
-- need to re-run twice as the argocd CRds as not yet initialized. 
-https://github.com/kubernetes-sigs/kustomize/issues/4354
-
-
 ## Pre-req
 
 - Helm
