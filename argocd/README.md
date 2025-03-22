@@ -2,11 +2,17 @@
 
 ## Start Argocd Bootstrap
 
+
 - Install Argo and install other applications on the fly.
 ```sh
     cd argocd/ 
     kubectl kustomize --enable-helm bootstrap |  kubectl apply -f -
 ```
+
+## Bug
+- need to re-run bootstrap twice as the argocd CRDs as not yet initialized. 
+https://github.com/kubernetes-sigs/kustomize/issues/4354
+
 
 ```sh
     kubectl port-forward svc/argocd-server -n argocd 8080:443
