@@ -1,0 +1,39 @@
+apiVersion: source.toolkit.fluxcd.io/v1
+kind: GitRepository
+metadata:
+  name: microservice-sample
+  namespace: default
+spec:
+  interval: 1m
+  url: https://github.com/allenvino1/k8s-playground
+  ref:
+    branch: main
+---
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+  name: microservice-sample
+  namespace: default
+spec:
+  valuesFrom:
+    - kind: ConfigMap
+      name: local-env-values
+      valuesKey: local-values.yaml
+  interval: 10m
+  chart:
+    spec:
+      chart: ./argocd/microservice-sample/chart
+      version: '0.1.0'
+      sourceRef:
+        kind: GitRepository
+        name: microservice-sample
+      interval: 10m
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: local-env-values
+  namespace: default
+data:
+  local-values.yaml: |
+    replicaCount: 1
